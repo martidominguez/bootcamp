@@ -24,3 +24,9 @@ func (s *ProductsDefault) Save(p *internal.Product) (err error) {
 	err = s.rp.Save(p)
 	return
 }
+
+// FindTop5Products returns the top 5 products.
+func (s *ProductsDefault) FindTop5Products() (p []internal.TopProduct, err error) {
+	p, err = s.rp.FindTop5Products()
+	return
+}

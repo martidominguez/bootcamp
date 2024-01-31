@@ -24,3 +24,15 @@ func (s *CustomersDefault) Save(c *internal.Customer) (err error) {
 	err = s.rp.Save(c)
 	return
 }
+
+// FindInvoicesByCondition returns all invoices for a customer by condition.
+func (s *CustomersDefault) FindInvoicesByCondition() (c []internal.CustomerInvoicesByCondition, err error) {
+	c, err = s.rp.FindInvoicesByCondition()
+	return
+}
+
+// FindTop5Customers returns the top customers by total of invoices.
+func (s *CustomersDefault) FindTop5Customers() (c []internal.TopCustomer, err error) {
+	c, err = s.rp.FindTop5Customers()
+	return
+}

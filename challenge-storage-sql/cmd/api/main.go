@@ -16,7 +16,7 @@ func main() {
 	cfg := &application.ConfigApplicationDefault{
 		Db: &mysql.Config{
 			User:   "root",
-			Passwd: "enter_your_password_here",
+			Passwd: "enter_password_here",
 			Net:    "tcp",
 			Addr:   "localhost:3306",
 			DBName: "fantasy_products",

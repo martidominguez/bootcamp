@@ -109,3 +109,75 @@ func (h *CustomersDefault) Create() http.HandlerFunc {
 		})
 	}
 }
+
+// CustomerInvoicesByConditionJSON is a struct that represents a customer's invoices by condition in JSON format
+type CustomerInvoicesByConditionJSON struct {
+	Condition int     `json:"condition"`
+	Total     float64 `json:"total"`
+}
+
+// GetInvoicesByCondition returns all invoices for a customer by condition
+func (h *CustomersDefault) GetInvoicesByCondition() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		// request
+		// ...
+
+		// process
+		c, err := h.sv.FindInvoicesByCondition()
+		if err != nil {
+			response.Error(w, http.StatusInternalServerError, "error getting invoices by condition")
+			return
+		}
+
+		// response
+		// - serialize
+		csJSON := make([]CustomerInvoicesByConditionJSON, len(c))
+		for ix, v := range c {
+			csJSON[ix] = CustomerInvoicesByConditionJSON{
+				Condition: v.Condition,
+				Total:     v.Total,
+			}
+		}
+		response.JSON(w, http.StatusOK, map[string]any{
+			"message": "invoices by condition found",
+			"data":    csJSON,
+		})
+	}
+}
+
+// TopCustomerJSON is a struct that represents a top customer in JSON format
+type TopCustomerJSON struct {
+	FirstName string  `json:"first_name"`
+	LastName  string  `json:"last_name"`
+	Total     float64 `json:"total"`
+}
+
+// GetTop5Customers returns the top 5 customers by total of invoices
+func (h *CustomersDefault) GetTop5Customers() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		// request
+		// ...
+
+		// process
+		c, err := h.sv.FindTop5Customers()
+		if err != nil {
+			response.Error(w, http.StatusInternalServerError, "error getting top 5 customers")
+			return
+		}
+
+		// response
+		// - serialize
+		csJSON := make([]TopCustomerJSON, len(c))
+		for ix, v := range c {
+			csJSON[ix] = TopCustomerJSON{
+				FirstName: v.FirstName,
+				LastName:  v.LastName,
+				Total:     v.Total,
+			}
+		}
+		response.JSON(w, http.StatusOK, map[string]any{
+			"message": "top 5 customers found",
+			"data":    csJSON,
+		})
+	}
+}

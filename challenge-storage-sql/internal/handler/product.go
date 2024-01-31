@@ -102,3 +102,38 @@ func (h *ProductsDefault) Create() http.HandlerFunc {
 		})
 	}
 }
+
+// TopProductJSON is a struct that represents a top product in JSON format
+type TopProductJSON struct {
+	Description string `json:"description"`
+	Total       int    `json:"total"`
+}
+
+// GetTop5 returns the top 5 products
+func (h *ProductsDefault) GetTop5() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		// request
+		// ...
+
+		// process
+		p, err := h.sv.FindTop5Products()
+		if err != nil {
+			response.Error(w, http.StatusInternalServerError, "error getting top 5 products")
+			return
+		}
+
+		// response
+		// - serialize
+		pJSON := make([]TopProductJSON, len(p))
+		for ix, v := range p {
+			pJSON[ix] = TopProductJSON{
+				Description: v.Description,
+				Total:       v.Total,
+			}
+		}
+		response.JSON(w, http.StatusOK, map[string]any{
+			"message": "top 5 products found",
+			"data":    pJSON,
+		})
+	}
+}

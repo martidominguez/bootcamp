@@ -6,4 +6,6 @@ type RepositoryProduct interface {
 	FindAll() (p []Product, err error)
 	// Save saves a product into the database.
 	Save(p *Product) (err error)
+	// FindTop5Products returns the top 5 products saved in the database.
+	FindTop5Products() (p []TopProduct, err error)
 }

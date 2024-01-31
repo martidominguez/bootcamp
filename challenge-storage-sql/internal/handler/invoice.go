@@ -107,3 +107,29 @@ func (h *InvoicesDefault) Create() http.HandlerFunc {
 		})
 	}
 }
+
+// UpdateTotals updates the totals of all invoices
+func (h *InvoicesDefault) UpdateTotals() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		// request
+		// ...
+
+		// process
+		err := h.sv.UpdateTotals()
+		if err != nil {
+			switch err {
+			case internal.ErrInvoicesNotUpdated:
+				response.Error(w, http.StatusInternalServerError, "error updating invoices")
+				return
+			default:
+				response.Error(w, http.StatusInternalServerError, "internal server error")
+				return
+			}
+		}
+
+		// response
+		response.JSON(w, http.StatusOK, map[string]any{
+			"message": "invoices updated",
+		})
+	}
+}

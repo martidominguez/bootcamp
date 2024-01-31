@@ -2,6 +2,7 @@ package repository
 
 import (
 	"database/sql"
+	"fmt"
 
 	"app/internal"
 )
@@ -66,4 +67,17 @@ func (r *InvoicesMySQL) Save(i *internal.Invoice) (err error) {
 	(*i).Id = int(id)
 
 	return
+}
+
+// UpdateTotals updates the totals of the invoices.
+func (r *InvoicesMySQL) UpdateTotals() (err error) {
+	// execute the query
+	_, err = r.db.Exec(
+		"UPDATE invoices i SET total = (SELECT SUM(s.quantity*p.price) FROM sales s JOIN products p ON s.product_id = p.id WHERE s.invoice_id = i.id GROUP BY s.invoice_id)",
+	)
+	if err != nil {
+		fmt.Println(err)
+		return internal.ErrInvoicesNotUpdated
+	}
+	return nil
 }

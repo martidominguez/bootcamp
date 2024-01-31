@@ -1,5 +1,12 @@
 package internal
 
+import "errors"
+
+var (
+	// ErrInvoicesNotUpdated is the error returned when the invoices are not updated.
+	ErrInvoicesNotUpdated = errors.New("repository: invoices not updated")
+)
+
 // InvoiceAttributes is the struct that represents the attributes of an invoice.
 type InvoiceAttributes struct {
 	// Datetime is the datetime of the invoice.

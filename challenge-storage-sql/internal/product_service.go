@@ -6,4 +6,6 @@ type ServiceProduct interface {
 	FindAll() (p []Product, err error)
 	// Save saves a product.
 	Save(p *Product) (err error)
+	// FindTop5Products returns the top 5 products.
+	FindTop5Products() (p []TopProduct, err error)
 }
