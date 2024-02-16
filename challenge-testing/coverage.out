@@ -1,0 +1,21 @@
+mode: set
+app/internal/handler/products_default.go:12.74,16.2 1 1
+app/internal/handler/products_default.go:33.50,34.54 1 1
+app/internal/handler/products_default.go:34.54,38.30 2 1
+app/internal/handler/products_default.go:38.30,41.18 3 1
+app/internal/handler/products_default.go:41.18,44.5 2 1
+app/internal/handler/products_default.go:49.3,50.17 2 1
+app/internal/handler/products_default.go:50.17,53.4 2 1
+app/internal/handler/products_default.go:57.3,58.23 2 1
+app/internal/handler/products_default.go:58.23,65.4 1 1
+app/internal/handler/products_default.go:66.3,69.5 1 1
+app/internal/repository/products_map.go:6.63,9.15 2 1
+app/internal/repository/products_map.go:9.15,11.3 1 1
+app/internal/repository/products_map.go:13.2,15.3 1 1
+app/internal/repository/products_map.go:25.107,29.25 2 1
+app/internal/repository/products_map.go:29.25,31.39 1 1
+app/internal/repository/products_map.go:31.39,32.12 1 1
+app/internal/repository/products_map.go:36.3,36.11 1 1
+app/internal/repository/products_map.go:39.2,39.8 1 1
+app/internal/repository/products_mock.go:6.58,8.2 1 0
+app/internal/repository/products_mock.go:22.118,27.2 2 0
